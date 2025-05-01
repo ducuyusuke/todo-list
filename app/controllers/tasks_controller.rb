@@ -8,6 +8,7 @@ class TasksController < ApplicationController
   # TODO: add unprocessable entity
   def create
     @task = Task.new(task_params)
+    @task.user = current_user
     @task.save
     redirect_to task_path(@task)
   end
@@ -40,6 +41,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :done)
+    params.require(:task).permit(:name, :done, :user_id)
   end
 end
