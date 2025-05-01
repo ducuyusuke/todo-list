@@ -3,6 +3,7 @@ class CreateTasks < ActiveRecord::Migration[7.1]
     create_table :tasks do |t|
       t.string :name
       t.boolean :done, default: false
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
