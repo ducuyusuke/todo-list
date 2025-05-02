@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
 
   def skip_pundit_and_index?
-    skip_pundit? || action_name == 'index'
+    skip_pundit? || action_name == 'index' || 'completed'
   end
 end
