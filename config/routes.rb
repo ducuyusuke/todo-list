@@ -9,5 +9,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "pages#home"
 
-  resources :tasks
+
+  resources :tasks do
+    patch :toggle_done, on: :member
+  end
+
+  get "done", to: "tasks#completed"
 end

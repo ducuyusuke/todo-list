@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_done]
   #TODO: cleanup this callback
-  after_action :verify_policy_scoped, only: :index
+  after_action :verify_policy_scoped, only: [:index, :completed]
 
   def new
     @task = Task.new
@@ -18,7 +18,11 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = policy_scope(Task)
+    @tasks = policy_scope(Task).where(done: false)
+  end
+
+  def completed
+    @tasks = policy_scope(Task).where(done: true)
   end
 
   def show
@@ -34,6 +38,13 @@ class TasksController < ApplicationController
     authorize @task
     @task.update(task_params)
     redirect_to task_path(@task)
+  end
+
+  def toggle_done
+    authorize @task
+    @task.mark_as_done!
+    @task.save
+    redirect_to task_path(@task), notice: "Tarefa alterada com sucesso."
   end
 
   def destroy

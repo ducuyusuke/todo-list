@@ -21,6 +21,14 @@ class TaskPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def toggle_done?
+    record.user == user
+  end
+
+  def completed?
+    record.user == user
+  end
+
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
