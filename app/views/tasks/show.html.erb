@@ -6,3 +6,5 @@
 <%= link_to "Editar #{@task.name}?", edit_task_path(@task) if policy(@task).edit? %>
 
 <%= button_to "Toggle Done", toggle_done_task_path(@task), method: :patch %>
+
+<%= link_to "Voltar", tasks_path %>
