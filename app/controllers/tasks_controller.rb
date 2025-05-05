@@ -18,10 +18,10 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = policy_scope(Task).where(done: false)
+    @tasks = policy_scope(Task).where(done: false).order(position: :asc)
     if params[:query].present?
       # TODO: if I remove the author field, remove here as well
-      @tasks = policy_scope(Task).where("name LIKE :query OR author LIKE :query", query: "%#{params[:query]}%").order(done: :asc)
+      @tasks = policy_scope(Task).where("name LIKE :query OR author LIKE :query", query: "%#{params[:query]}%").order(done: :asc, position: :asc)
     end
   end
 
