@@ -1,7 +1,32 @@
-<ul>
-  <% @tasks.each do |task| %>
-    <li><%= link_to task.name, task_path(task) %> <%= task.done %> </li>
-  <% end %>
-</ul>
+<!-- TODO: Add pg search support -->
+<div class="row justify-content-center">
+  <div class="col-sm-8 my-3">
+    <%= form_with url: tasks_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Procure por uma tarefa..."
+        %>
+      <%= submit_tag "Buscar", name: "", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    <div id="movies">
+      <% if @tasks.any? %>
+        <% @tasks.each do |task| %>
+          <h4><%= link_to task.name, task_path(task) %> <%= task.done %></h4>
+          <p><%= task.created_at.strftime("%d/%m/%y %-l%p") %></p>
+        <% end %>
+      <% else %>
+        <em>Não foi possível encontrar essa tarefa.</em>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <%= link_to "Criar nova tarefa", new_task_path %>
+<%= link_to "Voltar", root_path %>
+<%= link_to "Limpar busca", tasks_path if params[:query].present? %>
