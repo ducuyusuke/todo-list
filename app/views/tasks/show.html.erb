@@ -1,10 +1,1 @@
-<h2><%= @task.name %></h2>
-<p><%= @task.done %></p>
-
-<%= button_to "Deletar #{@task.name}?", @task, method: :delete if policy(@task).destroy? %>
-
-<%= link_to "Editar #{@task.name}?", edit_task_path(@task) if policy(@task).edit? %>
-
-<%= button_to "Toggle Done", toggle_done_task_path(@task), method: :patch %>
-
-<%= link_to "Voltar", tasks_path %>
+<%= render "shared/single_card", task: @task %>

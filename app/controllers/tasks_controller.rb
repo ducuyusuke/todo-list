@@ -14,15 +14,17 @@ class TasksController < ApplicationController
     @task.user = current_user
     authorize @task
     @task.save
-    redirect_to task_path(@task)
+    redirect_to tasks_path
   end
 
   def index
-    @tasks = policy_scope(Task).where(done: false)
+    @tasks = policy_scope(Task).where(done: false).order(position: :asc)
     if params[:query].present?
       # TODO: if I remove the author field, remove here as well
-      @tasks = policy_scope(Task).where("name LIKE :query OR author LIKE :query", query: "%#{params[:query]}%").order(done: :asc)
+      @tasks = policy_scope(Task).where("name LIKE :query OR author LIKE :query", query: "%#{params[:query]}%").order(done: :asc, position: :asc)
     end
+
+    @task = Task.new
   end
 
   def completed
@@ -41,14 +43,23 @@ class TasksController < ApplicationController
   def update
     authorize @task
     @task.update(task_params)
-    redirect_to task_path(@task)
+    redirect_to tasks_path, notice: "Tarefa alterada com sucesso."
   end
 
   def toggle_done
     authorize @task
     @task.mark_as_done!
     @task.save
-    redirect_to task_path(@task), notice: "Tarefa alterada com sucesso."
+    redirect_to tasks_path, notice: "Tarefa completada com sucesso."
+  end
+
+  def sort
+    params[:task_ids].each_with_index do |id, index|
+      task = Task.find(id)
+      task.update(position: index + 1)
+    end
+
+    head :ok
   end
 
   def destroy
@@ -65,6 +76,6 @@ class TasksController < ApplicationController
 
   # TODO: check permited properties after later migrations
   def task_params
-    params.require(:task).permit(:name, :done)
+    params.require(:task).permit(:name, :done, :position)
   end
 end

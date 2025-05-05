@@ -1,4 +1,4 @@
-<!-- TODO: Add pg search support -->
+<%# Search bar %>
 <div class="row justify-content-center">
   <div class="col-sm-8 my-3">
     <%= form_with url: tasks_path, method: :get, class: "d-flex" do %>
@@ -12,21 +12,29 @@
   </div>
 </div>
 
+<%# Task listing %>
 <div class="row justify-content-center">
   <div class="col-sm-8">
-    <div id="movies">
-      <% if @tasks.any? %>
+    <% if @tasks.any? %>
+      <div data-controller="sortable">
         <% @tasks.each do |task| %>
-          <h4><%= link_to task.name, task_path(task) %> <%= task.done %></h4>
-          <p><%= task.created_at.strftime("%d/%m/%y %-l%p") %></p>
+          <div data-id="<%= task.id %>">
+            <%= render "shared/list_card", task: task %>
+          </div>
         <% end %>
-      <% else %>
-        <em>Não foi possível encontrar essa tarefa.</em>
-      <% end %>
-    </div>
+    <% else %>
+      <em>Não há tarefas.</em>
+    <% end %>
   </div>
 </div>
 
-<%= link_to "Criar nova tarefa", new_task_path %>
 <%= link_to "Voltar", root_path %>
 <%= link_to "Limpar busca", tasks_path if params[:query].present? %>
+
+<div data-controller="toggle">
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar nova tarefa</button>
+
+  <div data-toggle-target="togglableElement" class="d-none mt-2">
+    <%= render "shared/form", task: @task %>
+  </div>
+</div>
