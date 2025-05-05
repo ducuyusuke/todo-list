@@ -26,6 +26,13 @@
   </div>
 </div>
 
-<%= link_to "Criar nova tarefa", new_task_path %>
 <%= link_to "Voltar", root_path %>
 <%= link_to "Limpar busca", tasks_path if params[:query].present? %>
+<%= link_to "Criar nova tarefa", new_task_path %>
+
+<div data-controller="toggle">
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar nova tarefa</button>
+  <div data-toggle-target="togglableElement" class="d-none mt-2">
+    <%= render "shared/form", task: @task %>
+  </div>
+</div>

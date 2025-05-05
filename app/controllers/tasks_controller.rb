@@ -14,7 +14,7 @@ class TasksController < ApplicationController
     @task.user = current_user
     authorize @task
     @task.save
-    redirect_to task_path(@task)
+    redirect_to tasks_path
   end
 
   def index
@@ -23,6 +23,8 @@ class TasksController < ApplicationController
       # TODO: if I remove the author field, remove here as well
       @tasks = policy_scope(Task).where("name LIKE :query OR author LIKE :query", query: "%#{params[:query]}%").order(done: :asc, position: :asc)
     end
+
+    @task = Task.new
   end
 
   def completed
