@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
 
   resources :tasks do
+    collection do
+      post :sort
+    end
     patch :toggle_done, on: :member
   end
 

@@ -53,6 +53,15 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: "Tarefa completada com sucesso."
   end
 
+  def sort
+    params[:task_ids].each_with_index do |id, index|
+      task = Task.find(id)
+      task.update(position: index + 1)
+    end
+
+    head :ok
+  end
+
   def destroy
     authorize @task
     @task.destroy
@@ -67,6 +76,6 @@ class TasksController < ApplicationController
 
   # TODO: check permited properties after later migrations
   def task_params
-    params.require(:task).permit(:name, :done)
+    params.require(:task).permit(:name, :done, :position)
   end
 end

@@ -1,4 +1,4 @@
-<!-- TODO: Add pg search support -->
+<%# Search bar %>
 <div class="row justify-content-center">
   <div class="col-sm-8 my-3">
     <%= form_with url: tasks_path, method: :get, class: "d-flex" do %>
@@ -12,17 +12,19 @@
   </div>
 </div>
 
+<%# Task listing %>
 <div class="row justify-content-center">
   <div class="col-sm-8">
-    <div id="movies">
-      <% if @tasks.any? %>
+    <% if @tasks.any? %>
+      <div data-controller="sortable">
         <% @tasks.each do |task| %>
-          <%= render "shared/list_card", task: task %>
+          <div data-id="<%= task.id %>">
+            <%= render "shared/list_card", task: task %>
+          </div>
         <% end %>
-      <% else %>
-        <em>Não há tarefas.</em>
-      <% end %>
-    </div>
+    <% else %>
+      <em>Não há tarefas.</em>
+    <% end %>
   </div>
 </div>
 

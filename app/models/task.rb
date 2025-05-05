@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :user
-  
+
   before_create :set_initial_position
 
   def mark_as_done!
