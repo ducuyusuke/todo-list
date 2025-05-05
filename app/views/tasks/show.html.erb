@@ -1,17 +1,1 @@
 <%= render "shared/single_card", task: @task %>
-
-<%= button_to "Deletar #{@task.name}?", @task, method: :delete if policy(@task).destroy? %>
-
-<% if policy(@task).edit? %>
-  <div data-controller="toggle">
-    <button data-action="click->toggle#fire" class="btn btn-outline-primary">Editar <%= @task.name%>?</button>
-    <div data-toggle-target="togglableElement" class="d-none mt-2">
-      <%= render "shared/form", task: @task %>
-    </div>
-  </div>
-<% end %>
-
-<%# TODO: transformar num botão clicável %>
-<%= button_to "Toggle Done", toggle_done_task_path(@task), method: :patch %>
-
-<%= link_to "Voltar", tasks_path %>

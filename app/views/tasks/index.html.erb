@@ -20,7 +20,7 @@
           <%= render "shared/list_card", task: task %>
         <% end %>
       <% else %>
-        <em>Não foi possível encontrar essa tarefa.</em>
+        <em>Não há tarefas.</em>
       <% end %>
     </div>
   </div>
@@ -31,6 +31,7 @@
 
 <div data-controller="toggle">
   <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar nova tarefa</button>
+
   <div data-toggle-target="togglableElement" class="d-none mt-2">
     <%= render "shared/form", task: @task %>
   </div>

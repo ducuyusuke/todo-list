@@ -43,14 +43,14 @@ class TasksController < ApplicationController
   def update
     authorize @task
     @task.update(task_params)
-    redirect_to task_path(@task)
+    redirect_to tasks_path, notice: "Tarefa alterada com sucesso."
   end
 
   def toggle_done
     authorize @task
     @task.mark_as_done!
     @task.save
-    redirect_to task_path(@task), notice: "Tarefa alterada com sucesso."
+    redirect_to tasks_path, notice: "Tarefa completada com sucesso."
   end
 
   def destroy
