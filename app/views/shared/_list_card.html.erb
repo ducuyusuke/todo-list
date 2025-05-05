@@ -1,0 +1,4 @@
+<div class="card-list">
+  <h4><%= link_to task.name, task_path(task) %> <%= task.done %></h4>
+  <p><%= task.created_at.strftime("%d/%m/%y %-l%p") %></p>
+</div>
