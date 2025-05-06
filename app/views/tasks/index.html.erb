@@ -22,11 +22,13 @@
             <%= render "shared/list_card", task: task %>
           </div>
         <% end %>
+      </div>
     <% else %>
       <em>Não há tarefas.</em>
     <% end %>
   </div>
 </div>
+
 
 <%= link_to "Voltar", root_path %>
 <%= link_to "Limpar busca", tasks_path if params[:query].present? %>

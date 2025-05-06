@@ -1,5 +1,13 @@
-<ul>
-  <% @tasks.each do |task| %>
-    <li><%= link_to task.name, task_path(task) %> <%= task.done %> </li>
-  <% end %>
-</ul>
+<div class="row justify-content-center pt-5">
+  <div class="col-sm-8">
+    <% if @tasks.any? %>
+        <% @tasks.each do |task| %>
+          <div data-id="<%= task.id %>">
+            <%= render "shared/list_card", task: task %>
+          </div>
+        <% end %>
+    <% else %>
+      <em>Não há tarefas.</em>
+    <% end %>
+  </div>
+</div>
