@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-main border-bottom border-primary mb-5">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%# TODO: change image %>
+      <%# TODO: change image when styling frontend? %>
       <%= image_tag "https://static.vecteezy.com/system/resources/thumbnails/007/126/840/small_2x/mountain-peak-flag-icon-vector.jpg" %>
     <% end %>
 
@@ -20,14 +20,12 @@
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%# TODO: change image, put a placeholder and implement default photos for user %>
-            <%= image_tag "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-black-png-image_3918427.jpg", class: "avatar", alt: "dropdown menu" %>
+            <%= image_tag "#{current_user.avatar}", class: "avatar", alt: "dropdown menu"%>
           </a>
-            <%# TODO: change links %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Tarefas concluídas", done_path, class: "dropdown-item" %>
               <%= link_to "Editar perfil", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <%= link_to "Sair", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
