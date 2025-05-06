@@ -21,7 +21,15 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+
+    <% ['avatar_1.png', 'avatar_2.png', 'avatar_3.png', 'avatar_4.png', 'avatar_5.png', 'avatar_6.png', 'avatar_7.png', 'avatar_8.png'].each do |img| %>
+      <label style="display:inline-block; margin-right:10px;">
+        <%= f.radio_button :avatar, img %><br>
+        <%= image_tag("#{img}", size: "80x80") %>
+      </label>
+    <% end %>
   </div>
+
 
   <div class="form-actions">
     <%= f.button :submit, "Update" %>
