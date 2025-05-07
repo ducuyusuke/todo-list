@@ -1,6 +1,5 @@
 <div class="card-single">
   <h2><%= task.name %> <%= task.done %></h2>
-  <p><%= task.created_at.strftime("%d/%m/%y %-l%p") %></p>
 </div>
 
 <%= button_to "Deletar #{task.name}?", task, method: :delete if policy(task).destroy? %>

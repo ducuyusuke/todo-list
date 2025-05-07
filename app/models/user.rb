@@ -5,4 +5,6 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
 
   has_many :tasks
+
+  validates :avatar, presence: true
 end

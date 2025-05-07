@@ -8,22 +8,25 @@
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
+    <%= f.input :username,
                 required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-
+                autofocus: true,
+                hint: ("Você não poderá alterar isso posteriormente!"),
+                input_html: { autocomplete: "username" }%>
     <% ['avatar_1.png', 'avatar_2.png', 'avatar_3.png', 'avatar_4.png', 'avatar_5.png', 'avatar_6.png', 'avatar_7.png', 'avatar_8.png'].each do |img| %>
       <label style="display:inline-block; margin-right:10px;">
         <%= f.radio_button :avatar, img %><br>
         <%= image_tag("#{img}", size: "80x80") %>
       </label>
     <% end %>
+    <%= f.input :password,
+                required: true,
+                hint: ("mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
   </div>
-
 
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
