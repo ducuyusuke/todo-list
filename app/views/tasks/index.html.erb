@@ -16,18 +16,19 @@
 <div class="row justify-content-center">
   <div class="col-sm-8">
     <% if @tasks.any? %>
-      <div data-controller="sortable">
+      <ol data-controller="sortable">
         <% @tasks.each do |task| %>
-          <div data-id="<%= task.id %>">
+          <li data-id="<%= task.id %>">
             <%= render "shared/list_card", task: task %>
-          </div>
+          </li>
         <% end %>
-      </div>
+      </ol>
     <% else %>
       <em>Não há tarefas.</em>
     <% end %>
   </div>
 </div>
+
 
 
 <%= link_to "Voltar", root_path %>

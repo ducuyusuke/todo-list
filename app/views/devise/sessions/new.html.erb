@@ -8,8 +8,9 @@
                 input_html: { autocomplete: "email" } %>
     <%= f.input :password,
                 required: false,
+                label: "Senha",
                 input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <%= f.input :remember_me, label: "Manter conectado?", as: :boolean if devise_mapping.rememberable? %>
   </div>
 
   <div class="form-actions">
