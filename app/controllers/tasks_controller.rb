@@ -75,6 +75,6 @@ class TasksController < ApplicationController
 
   # TODO: check permited properties after later migrations
   def task_params
-    params.require(:task).permit(:name, :done, :position)
+    params.require(:task).permit(:name, :done, :position, :due_date)
   end
 end

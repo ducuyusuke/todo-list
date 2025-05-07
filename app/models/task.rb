@@ -2,6 +2,7 @@ class Task < ApplicationRecord
   belongs_to :user
 
   before_create :set_initial_position
+  validates :name, :due_date, presence: true
 
   def mark_as_done!
     self.update(done: !done)

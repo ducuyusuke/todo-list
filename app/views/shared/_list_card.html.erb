@@ -1,7 +1,7 @@
 <div class="card-list">
 
   <div data-controller="toggle">
-    <button data-action="click->toggle#fire" class="btn btn-outline-primary <%= task.done ? 'done-task' : 'pending-task' %>"><%= task.name %></button>
+    <button data-action="click->toggle#fire" class="btn btn-outline-primary <%= task.done ? 'done-task' : 'pending-task' %>"><%= task.name %> (<%= task.due_date.strftime("%d/%m/%y") %>)</button>
 
     <div data-toggle-target="togglableElement" class="d-none mt-2">
       <%= render "shared/single_card", task: task %>
