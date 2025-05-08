@@ -1,7 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-main border-bottom border-primary mb-5">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%# TODO: change image when styling frontend? %>
       <%= image_tag "https://static.vecteezy.com/system/resources/thumbnails/007/126/840/small_2x/mountain-peak-flag-icon-vector.jpg" %>
     <% end %>
 
@@ -12,19 +11,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link" unless current_page?(root_path)%>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Tarefas de #{current_user.username}", lists_path, class: "nav-link" %>
-          </li>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a href="#" class="avatar-bordered" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "#{current_user.avatar}", class: "avatar", alt: "dropdown menu"%>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Quadros de tarefas", lists_path, class: "dropdown-item" %>
               <%= link_to "Tarefas concluídas", done_path, class: "dropdown-item" %>
-              <%= link_to "Editar perfil", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Editar #{current_user.username}", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Sair", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

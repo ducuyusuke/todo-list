@@ -6,5 +6,5 @@
 
     has_many :lists, dependent: :destroy
     has_many :tasks, through: :lists
-    validates :avatar, presence: true
+    validates :username, :avatar, presence: true
   end

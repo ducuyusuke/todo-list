@@ -1,17 +1,20 @@
-<div class="card-single">
-  <h2><%= task.name %> <%= task.done %></h2>
-</div>
+<div class="d-flex">
+  <%= button_to toggle_done_task_path(task), method: :patch, class: 'btn btn-outline-primary' do %>
+    <i class="fas fa-check"></i>
+  <% end %>
 
-<%= button_to "Deletar #{task.name}?", task, method: :delete if policy(task).destroy? %>
+  <%= button_to task, method: :delete, form: { data: { turbo_confirm: "Deseja deletar #{task.name}?" } }, class: "btn btn-outline-danger", title: "Delete" do %>
+    <i class="fa-solid fa-trash"></i>
+  <% end %>
+</div>
 
 <% if policy(task).edit? && !(controller.action_name == "completed") %>
   <div data-controller="toggle">
-    <button data-action="click->toggle#fire" class="btn btn-outline-primary">Editar <%= task.name%>?</button>
+    <button data-action="click->toggle#fire" class="btn btn-outline-primary">
+      <i class="fa-solid fa-pencil-alt"></i>
+    </button>
     <div data-toggle-target="togglableElement" class="d-none mt-2">
-      <%= render "shared/form", task: task %>
+      <%= render "shared/form", list: @list, task: @task %>
     </div>
   </div>
 <% end %>
-
-<%# TODO: transformar num botão clicável %>
-<%= button_to "Toggle Done", toggle_done_task_path(task), method: :patch %>

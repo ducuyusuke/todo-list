@@ -1,9 +1,11 @@
-<%= simple_form_for([@list, @task]) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<%= simple_form_for([list, task]) do |f| %>
+  <%= f.input :name, label: "Tarefa" %>
 
-  <%= f.label :due_date %>
-  <%= f.text_field :due_date, type: "date" %>
+  <%= f.input :due_date,
+              label: "Prazo",
+              as: :string,
+              input_html: { type: "date" },
+              hint: "deixe em branco caso não haja" %>
 
-  <%= f.submit %>
+  <%= f.button :submit, "Enviar" %>
 <% end %>

@@ -25,7 +25,7 @@ class TasksController < ApplicationController
     authorize @task
 
     if @task.save
-      redirect_to list_tasks_path(@list), notice: "Tarefa criada com sucesso."
+      redirect_to list_tasks_path(@list), notice: "Tareoncluída."
     else
       @list = List.find(params[:list_id])
       render :new, status: :unprocessable_entity
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   def update
     authorize @task
     if @task.update(task_params)
-      redirect_to list_tasks_path(@task.list), notice: "Tarefa alterada com sucesso."
+      redirect_to list_tasks_path(@task.list), notice: "Tarefaoncluída."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
     authorize @task
     @task.mark_as_done!
     @task.save
-    redirect_to list_tasks_path(@task.list), notice: "Tarefa completada com sucesso."
+    redirect_to list_tasks_path(@task.list), notice: "Tarefa concluída."
   end
 
   def sort
