@@ -14,7 +14,7 @@ Achieve é um gerenciador de listas de tarefas simples, limpo e fácil de usar, 
 
 ## Modelos & Relacionamentos
 
-![Schema](https://raw.githubusercontent.com/ducuyusuke/todo-list/app/main/assets/images/schema.png)
+![Schema](https://raw.githubusercontent.com/ducuyusuke/todo-list/main/app/assets/images/schema.png)
 
 * **User**
 
