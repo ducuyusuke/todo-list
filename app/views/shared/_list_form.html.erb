@@ -1,5 +1,4 @@
 <%= simple_form_for(list) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
+  <%= f.input :name, label: "Nome" %>
+  <%= f.button :submit, "Enviar" %>
 <% end %>

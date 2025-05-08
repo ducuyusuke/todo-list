@@ -18,7 +18,7 @@ class ListsController < ApplicationController
     authorize @list
 
     if @list.save
-      redirect_to lists_path, notice: "Lista criada com sucesso."
+      redirect_to lists_path, notice: "Quadro criado."
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class ListsController < ApplicationController
     authorize @list
 
     if @list.update(list_params)
-      redirect_to lists_path, notice: "Lista atualizada com sucesso."
+      redirect_to lists_path, notice: "Quadro atualizado."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class ListsController < ApplicationController
   def destroy
     authorize @list
     @list.destroy
-    redirect_to lists_path, notice: "Lista excluída com sucesso.", status: :see_other
+    redirect_to lists_path, notice: "Quadro excluído.", status: :see_other
   end
 
   private

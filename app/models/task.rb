@@ -1,8 +1,9 @@
 class Task < ApplicationRecord
   belongs_to :list
+  
+  validates :name, presence: true
 
   before_create :set_initial_position
-  validates :name, presence: true
 
   def mark_as_done!
     self.update(done: !done)
