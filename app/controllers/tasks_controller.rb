@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     if params[:query].present?
       @tasks = policy_scope(@list.tasks)
                 .where("tasks.name LIKE ?", "%#{params[:query]}%")
-                .order(done: :asc, position: :asc)
+                .order(done: :asc, due_date: :asc)
     end
 
     @task = @list.tasks.new
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
     authorize @task
 
     if @task.save
-      redirect_to list_tasks_path(@list), notice: "Tareoncluída."
+      redirect_to list_tasks_path(@list), notice: "Tarefa criada."
     else
       @list = List.find(params[:list_id])
       render :new, status: :unprocessable_entity
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   def update
     authorize @task
     if @task.update(task_params)
-      redirect_to list_tasks_path(@task.list), notice: "Tarefaoncluída."
+      redirect_to list_tasks_path(@task.list), notice: "Tarefa atualizada."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -73,7 +73,7 @@ class TasksController < ApplicationController
     authorize @task
     @task.destroy
     @list = @task.list
-    redirect_to list_tasks_path(@task.list), status: :see_other
+    redirect_to list_tasks_path(@task.list),  notice: "Tarefa excluída.", status: :see_other
   end
 
   private

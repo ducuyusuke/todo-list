@@ -10,15 +10,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <%# Top-level rendering items %>
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
 
     <%# Yield %>
-    <div class="container">
+    <div class="container py-5 flex-grow-1">
       <%= yield %>
     </div>
 
+    <%# Bottom-level rendering items %>
+    <%= render "shared/footer" %>
   </body>
 </html>

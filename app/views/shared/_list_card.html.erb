@@ -1,9 +1,14 @@
 <div class="card-list">
+  <div data-controller="toggle" class="w-100">
+    <button data-action="click->toggle#fire"
+            class="btn btn-outline-primary w-100 text-start d-flex justify-content-between align-items-center <%= task.done ? 'done-task' : 'pending-task' %>">
+      <span><%= task.name %></span>
+      <% if task.due_date.present? %>
+        <span class="badge text-dark"><%= task.due_date.strftime("%d/%m/%y") %></span>
+      <% end %>
+    </button>
 
-  <div data-controller="toggle">
-    <button data-action="click->toggle#fire" class="btn btn-outline-primary <%= task.done ? 'done-task' : 'pending-task' %>"> <%= task.name %> <%= task.due_date.strftime("%d/%m/%y") if task.due_date.present? %> </button>
-
-    <div data-toggle-target="togglableElement" class="d-none mt-2">
+    <div data-toggle-target="togglableElement" class="d-none mt-3">
       <%= render "shared/single_card", task: task %>
     </div>
   </div>

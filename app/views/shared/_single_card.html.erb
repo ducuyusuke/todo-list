@@ -1,20 +1,29 @@
-<div class="d-flex">
-  <%= button_to toggle_done_task_path(task), method: :patch, class: 'btn btn-outline-primary' do %>
-    <i class="fas fa-check"></i>
+<div class="d-flex gap-2 mb-3">
+  <%# Mark as done %>
+  <%= button_to toggle_done_task_path(task),
+                method: :patch,
+                class: 'btn btn-outline-primary flex-grow-1' do %>
+    <i class="fas fa-check me-2"></i>Marcar como concluída
   <% end %>
 
-  <%= button_to task, method: :delete, form: { data: { turbo_confirm: "Deseja deletar #{task.name}?" } }, class: "btn btn-outline-danger", title: "Delete" do %>
-    <i class="fa-solid fa-trash"></i>
+  <%# Destroy %>
+  <%= button_to task,
+                method: :delete,
+                form: { data: { turbo_confirm: "Deseja deletar #{task.name}?" } },
+                class: "btn btn-outline-danger flex-grow-1",
+                title: "Delete" do %>
+    <i class="fa-solid fa-trash me-2"></i>Deletar
   <% end %>
 </div>
 
+<%# Edit %>
 <% if policy(task).edit? && !(controller.action_name == "completed") %>
-  <div data-controller="toggle">
-    <button data-action="click->toggle#fire" class="btn btn-outline-primary">
-      <i class="fa-solid fa-pencil-alt"></i>
+  <div data-controller="toggle" class="w-100">
+    <button data-action="click->toggle#fire" class="btn btn-outline-primary w-100">
+      <i class="fa-solid fa-pencil-alt me-2"></i>Editar
     </button>
-    <div data-toggle-target="togglableElement" class="d-none mt-2">
-      <%= render "shared/form", list: @list, task: @task %>
+    <div data-toggle-target="togglableElement" class="d-none mt-3">
+      <%= render "shared/form", list: task.list, task: task %>
     </div>
   </div>
 <% end %>

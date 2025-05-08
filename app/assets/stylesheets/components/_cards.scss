@@ -4,5 +4,36 @@
 }
 
 .pending-task {
-  background-color: #fff3cd;
+  background-color: #d7dbfd;
+}
+
+.boxed-list {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title {
+    color: $primary;
+    font-weight: 600;
+
+    a {
+      color: inherit;
+    }
+  }
+}
+
+.text-muted {
+  i {
+    opacity: 0.5;
+  }
+}
+
+.form-control {
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.15);
+  }
 }

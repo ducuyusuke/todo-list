@@ -1,0 +1,51 @@
+<footer class="footer mt-auto py-4 bg-light border-top border-3 border-primary">
+  <div class="container">
+    <div class="row g-4">
+      <%# Branding %>
+      <div class="col-md-4">
+        <h5 class="mb-3">Achieve</h5>
+        <p class="text-muted small">Organize suas tarefas, defina metas e acompanhe seu progresso de forma simples e eficiente.</p>
+      </div>
+
+      <%# Placeholder links %>
+      <div class="col-md-4">
+        <h5 class="mb-3">Links Úteis</h5>
+        <ul class="list-unstyled">
+          <li><%= link_to "Sobre", "#", class: "text-muted text-decoration-none" %></li>
+          <li><%= link_to "Termos de Uso", "#", class: "text-muted text-decoration-none" %></li>
+          <li><%= link_to "Política de Privacidade", "#", class: "text-muted text-decoration-none" %></li>
+        </ul>
+      </div>
+
+      <%# Contact info %>
+      <div class="col-md-4">
+        <h5 class="mb-3">Contato</h5>
+        <ul class="list-unstyled">
+          <li class="text-muted"><i class="fas fa-envelope me-2"></i>contato@achieve.com</li>
+          <li class="text-muted"><i class="fas fa-phone me-2"></i>(11) 9999-9999</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <%# Copyright info %>
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <p class="mb-0 text-muted small">
+          © <%= Time.current.year %> Achieve. Todos os direitos reservados.
+        </p>
+      </div>
+
+      <%# Social Media links %>
+      <div class="col-md-6 text-center text-md-end">
+        <div class="social-links">
+          <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

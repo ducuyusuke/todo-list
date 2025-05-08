@@ -1,11 +1,19 @@
-<%= simple_form_for([list, task]) do |f| %>
-  <%= f.input :name, label: "Tarefa" %>
+<%= simple_form_for([list, task], html: { class: "needs-validation" }) do |f| %>
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+      <%= f.input :name,
+                  label: "Tarefa",
+                  input_html: { class: "form-control-lg" },
+                  wrapper_html: { class: "mb-3" } %>
 
-  <%= f.input :due_date,
-              label: "Prazo",
-              as: :string,
-              input_html: { type: "date" },
-              hint: "deixe em branco caso não haja" %>
+      <%= f.input :due_date,
+                  label: "Prazo",
+                  as: :string,
+                  input_html: { type: "date", class: "form-control-lg" },
+                  hint: "deixe em branco caso não haja",
+                  wrapper_html: { class: "mb-4" } %>
 
-  <%= f.button :submit, "Enviar" %>
+      <%= f.button :submit, "Enviar", class: "btn btn-success btn-lg w-100" %>
+    </div>
+  </div>
 <% end %>

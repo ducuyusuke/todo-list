@@ -10,3 +10,9 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+// Style for the entire body
+body {
+  background-color: $light-gray;
+  min-height: 80vh !important;
+}

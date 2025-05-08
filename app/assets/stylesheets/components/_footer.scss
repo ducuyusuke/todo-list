@@ -1,0 +1,32 @@
+.footer {
+  background-color: $light-gray;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  h5 {
+    color: $primary;
+    font-weight: 600;
+  }
+
+  .social-links {
+    a {
+      font-size: 1.2rem;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: $primary !important;
+      }
+    }
+  }
+
+  ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
