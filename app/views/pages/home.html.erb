@@ -1,2 +1,91 @@
-<h1>Achieve!</h1>
-<h6>Organização para alcançar seus sonhos.</h6>
+<div class="text-center">
+  <%# Hero banner %>
+  <section class="hero">
+    <h1 class="display-4 fw-bold mb-2">Achieve!</h1>
+    <p class="lead text-muted mb-3">Organização para alcançar seus sonhos.</p>
+  </section>
+
+  <%# Features %>
+  <section class="features mb-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <i class="fas fa-tasks fa-2x text-primary mb-3"></i>
+            <h3 class="h5 mb-3">Organize Quadros</h3>
+            <p class="text-muted mb-0">Crie e gerencie quadros de tarefas de forma simples e intuitiva.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <i class="fas fa-chart-line fa-2x text-primary mb-3"></i>
+            <h3 class="h5 mb-3">Acompanhe seu Progresso</h3>
+            <p class="text-muted mb-0">Visualize seu avanço e mantenha o foco nos seus objetivos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <i class="fas fa-solid fa-shield-halved fa-2x text-primary mb-3"></i>
+            <h3 class="h5 mb-3">Segurança Garantida</h3>
+            <p class="text-muted mb-0">Todas as suas informações são protegidas por criptografia de ponta a ponta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# CTA %>
+  <section class="cta mb-5">
+    <div class="card border-0 bg-primary text-white">
+      <div class="card-body p-5">
+        <h2 class="h3 mb-4">Pronto para começar?</h2>
+        <p class="mb-4">Junte-se a milhares de pessoas que já estão organizando suas vidas com o Achieve.</p>
+        <div class="d-flex justify-content-center gap-3">
+          <%= link_to "Comece a se organizar já!", new_list_path, class: "btn btn-success btn-lg" %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# Testimonials %>
+  <section class="testimonials">
+    <h2 class="h3 mb-4">O que nossos usuários dizem</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <p class="text-muted mb-3">"O Achieve transformou completamente minha forma de organizar minhas tarefas diárias."</p>
+            <p class="mb-0 fw-bold">Maria Silva</p>
+            <small class="text-muted">Designer</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <p class="text-muted mb-3">"Finalmente encontrei uma ferramenta que me ajuda a manter o foco nos meus objetivos."</p>
+            <p class="mb-0 fw-bold">João Santos</p>
+            <small class="text-muted">Desenvolvedor</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <p class="text-muted mb-3">"Simples, intuitivo e eficiente. Exatamente o que eu precisava. O design é minimalista e cai bem aos olhos."</p>
+            <p class="mb-0 fw-bold">Ana Costa</p>
+            <small class="text-muted">Estudante</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

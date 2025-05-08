@@ -1,46 +1,71 @@
-<%# Header %>
-<h2><%= @list.name %></h2>
-
-<%# Search %>
-<div class="row justify-content-center">
-  <div class="col-sm-8 my-3">
-    <%= form_with url: list_tasks_path(@list), method: :get, class: "d-flex" do %>
-      <%= text_field_tag :query,
-            params[:query],
-            class: "form-control",
-            placeholder: "Procure por uma tarefa..."
-        %>
-      <%= submit_tag "Buscar", name: "", class: "btn btn-primary" %>
+<div class="container py-4">
+  <%# Header %>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="h3 mb-0"><%= @list.name %></h2>
+    <%= link_to lists_path, class: "btn btn-outline-secondary btn-sm" do %>
+      <i class="fas fa-arrow-left me-1"></i>Voltar
     <% end %>
   </div>
-</div>
 
-<%# Tasks %>
-<div class="row justify-content-center">
-  <div class="col-sm-8">
-    <% if @tasks.any? %>
-      <ol data-controller="sortable">
-        <% @tasks.each do |task| %>
-          <li data-id="<%= task.id %>">
-            <%= render "shared/list_card", task: task %>
-          </li>
+  <%# Search %>
+  <div class="row justify-content-center mb-4">
+    <div class="col-sm-8">
+      <%= form_with url: list_tasks_path(@list), method: :get, class: "d-flex gap-2" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Procure por uma tarefa..."
+          %>
+        <%= submit_tag "Buscar", name: "", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Tasks %>
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <% if @tasks.any? %>
+        <ol data-controller="sortable" class="list-unstyled">
+          <% @tasks.each do |task| %>
+            <li data-id="<%= task.id %>" class="mb-3">
+              <%= render "shared/list_card", task: task %>
+            </li>
+          <% end %>
+        </ol>
+      <% else %>
+        <div class="text-center py-5">
+          <p class="text-muted mb-0">
+            <i class="fas fa-clipboard-list fa-2x mb-3"></i><br>
+            Não há tarefas.
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Links %>
+  <div class="row justify-content-center mt-4">
+    <div class="col-sm-8">
+      <div class="d-flex justify-content-between align-items-center">
+        <% if params[:query].present? %>
+          <%= link_to list_tasks_path(@list), class: "btn btn-outline-secondary btn-sm" do %>
+            <i class="fas fa-times me-1"></i>Limpar busca
+          <% end %>
+        <% else %>
+          <div></div> <%# Empty div for flex spacing %>
         <% end %>
-      </ol>
-    <% else %>
-      <em>Não há tarefas.</em>
-    <% end %>
-  </div>
-</div>
 
+        <%# New task %>
+        <div data-controller="toggle">
+          <button data-action="click->toggle#fire" class="btn btn-success">
+            <i class="fas fa-plus me-1"></i>Criar nova tarefa
+          </button>
 
-<%# Links %>
-<%= link_to "Voltar", lists_path %>
-<%= link_to "Limpar busca", list_tasks_path if params[:query].present? %>
-
-<div data-controller="toggle">
-  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar nova tarefa</button>
-
-  <div data-toggle-target="togglableElement" class="d-none mt-2">
-    <%= render "shared/form", list: @list, task: @task %>
+          <div data-toggle-target="togglableElement" class="d-none mt-3">
+            <%= render "shared/form", list: @list, task: @task %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
