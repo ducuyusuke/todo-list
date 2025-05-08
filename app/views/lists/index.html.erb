@@ -1,4 +1,4 @@
-<h1>Your Lists</h1>
+<h1>Quadros de tarefas</h1>
 
 <ul>
   <% @lists.each do |list| %>
@@ -7,7 +7,10 @@
 
       <% if policy(list).edit? %>
         <div data-controller="toggle">
-          <button data-action="click->toggle#fire" class="btn btn-outline-primary">Editar <%= list.name%>?</button>
+          <button data-action="click->toggle#fire" class="btn btn-outline-primary">
+            <i class="fa-solid fa-pencil-alt"></i>
+            Editar
+          </button>
           <div data-toggle-target="togglableElement" class="d-none mt-2">
             <%= render "shared/list_form", list: list %>
           </div>
@@ -15,8 +18,9 @@
       <% end %>
 
       <% if policy(list).destroy? %>
-        <%= button_to list, method: :delete, form: { data: { turbo_confirm: "Delete #{list.name}?" } }, class: "btn btn-outline-danger", title: "Delete" do %>
-          <i class="fa-solid fa-trash"></i> Delete
+        <%= button_to list, method: :delete, form: { data: { turbo_confirm: "Deseja deletar #{list.name}?" } }, class: "btn btn-outline-danger", title: "Delete" do %>
+          <i class="fa-solid fa-trash"></i>
+          Deletar
         <% end %>
       <% end %>
     </li>
@@ -24,8 +28,9 @@
 </ul>
 
 
+
 <div data-controller="toggle">
-  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar nova lista</button>
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar novo quadro</button>
 
   <div data-toggle-target="togglableElement" class="d-none mt-2">
     <%= render "shared/list_form", list: @list %>
