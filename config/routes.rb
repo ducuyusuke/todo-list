@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "pages#home"
 
+  resources :lists, except: [:show] do
+    resources :tasks, only: [:index, :new, :create]
+  end
 
-  resources :tasks do
+  resources :tasks, except: [:new, :create, :index] do
     collection do
       post :sort
     end

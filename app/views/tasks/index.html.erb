@@ -1,7 +1,10 @@
-<%# Search bar %>
+<%# Header %>
+<h2><%= @list.name %></h2>
+
+<%# Search %>
 <div class="row justify-content-center">
   <div class="col-sm-8 my-3">
-    <%= form_with url: tasks_path, method: :get, class: "d-flex" do %>
+    <%= form_with url: list_tasks_path(@list), method: :get, class: "d-flex" do %>
       <%= text_field_tag :query,
             params[:query],
             class: "form-control",
@@ -12,7 +15,7 @@
   </div>
 </div>
 
-<%# Task listing %>
+<%# Tasks %>
 <div class="row justify-content-center">
   <div class="col-sm-8">
     <% if @tasks.any? %>
@@ -30,14 +33,14 @@
 </div>
 
 
-
-<%= link_to "Voltar", root_path %>
-<%= link_to "Limpar busca", tasks_path if params[:query].present? %>
+<%# Links %>
+<%= link_to "Voltar", lists_path %>
+<%= link_to "Limpar busca", list_tasks_path if params[:query].present? %>
 
 <div data-controller="toggle">
   <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar nova tarefa</button>
 
   <div data-toggle-target="togglableElement" class="d-none mt-2">
-    <%= render "shared/form", task: @task %>
+    <%= render "shared/form",  list: @list, task: @task %>
   </div>
 </div>

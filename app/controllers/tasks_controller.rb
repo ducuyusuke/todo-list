@@ -1,29 +1,35 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_done]
-  #TODO: cleanup this callback
+  before_action :set_list, only: [:index, :new, :create]
   after_action :verify_policy_scoped, only: [:index, :completed]
 
-  def new
-    @task = Task.new
-    authorize @task
-  end
-
-  # TODO: add unprocessable entity
-  def create
-    @task = Task.new(task_params)
-    @task.user = current_user
-    authorize @task
-    @task.save
-    redirect_to tasks_path
-  end
-
   def index
-    @tasks = policy_scope(Task).where(done: false).order(position: :asc)
+    @tasks = policy_scope(@list.tasks).where(done: false).order(position: :asc)
+
     if params[:query].present?
-      @tasks = policy_scope(Task).where("name LIKE ?", "%#{params[:query]}%").order(done: :asc, position: :asc)
+      @tasks = policy_scope(@list.tasks)
+                .where("tasks.name LIKE ?", "%#{params[:query]}%")
+                .order(done: :asc, position: :asc)
     end
 
-    @task = Task.new
+    @task = @list.tasks.new
+  end
+
+  def new
+    @task = @list.tasks.new
+    authorize @task
+  end
+
+  def create
+    @task = @list.tasks.new(task_params)
+    authorize @task
+
+    if @task.save
+      redirect_to list_tasks_path(@list), notice: "Tarefa criada com sucesso."
+    else
+      @list = List.find(params[:list_id])
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def completed
@@ -38,18 +44,20 @@ class TasksController < ApplicationController
     authorize @task
   end
 
-  # TODO: add unprocessable entity
   def update
     authorize @task
-    @task.update(task_params)
-    redirect_to tasks_path, notice: "Tarefa alterada com sucesso."
+    if @task.update(task_params)
+      redirect_to list_tasks_path(@task.list), notice: "Tarefa alterada com sucesso."
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def toggle_done
     authorize @task
     @task.mark_as_done!
     @task.save
-    redirect_to tasks_path, notice: "Tarefa completada com sucesso."
+    redirect_to list_tasks_path(@task.list), notice: "Tarefa completada com sucesso."
   end
 
   def sort
@@ -64,7 +72,8 @@ class TasksController < ApplicationController
   def destroy
     authorize @task
     @task.destroy
-    redirect_to tasks_path, status: :see_other
+    @list = @task.list
+    redirect_to list_tasks_path(@task.list), status: :see_other
   end
 
   private
@@ -73,7 +82,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  # TODO: check permited properties after later migrations
+  def set_list
+    @list = List.find(params[:list_id])
+  end
+
   def task_params
     params.require(:task).permit(:name, :done, :position, :due_date)
   end

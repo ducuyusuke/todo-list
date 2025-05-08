@@ -1,0 +1,33 @@
+<h1>Your Lists</h1>
+
+<ul>
+  <% @lists.each do |list| %>
+    <li>
+      <%= link_to list.name, list_tasks_path(list) %>
+
+      <% if policy(list).edit? %>
+        <div data-controller="toggle">
+          <button data-action="click->toggle#fire" class="btn btn-outline-primary">Editar <%= list.name%>?</button>
+          <div data-toggle-target="togglableElement" class="d-none mt-2">
+            <%= render "shared/list_form", list: list %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if policy(list).destroy? %>
+        <%= button_to list, method: :delete, form: { data: { turbo_confirm: "Delete #{list.name}?" } }, class: "btn btn-outline-danger", title: "Delete" do %>
+          <i class="fa-solid fa-trash"></i> Delete
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+
+<div data-controller="toggle">
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Criar nova lista</button>
+
+  <div data-toggle-target="togglableElement" class="d-none mt-2">
+    <%= render "shared/list_form", list: @list %>
+  </div>
+</div>
